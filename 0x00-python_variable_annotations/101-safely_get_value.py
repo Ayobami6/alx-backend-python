@@ -4,11 +4,12 @@
 from typing import Any, Union, Mapping, TypeVar
 
 T = TypeVar('T')
+NoneType = TypeVar('NoneType', None, None)
 R = Union[Any, T]
-D = Union[None, T]
+D = Union[T, None]
 
 
-def safely_get_value(dct: Mapping, key: Any, default: D = None) -> R:
+def safely_get_value(dct: Mapping, key: Any, default: D) -> R:
     """Returns the value safely.
 
     Args:
