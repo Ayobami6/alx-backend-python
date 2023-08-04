@@ -11,6 +11,7 @@ def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
         lst (Iterable[Sequence]): list of floats
 
     Returns:
-        List[Tuple[Sequence, int]]: list of tuples containing elements and their lengths
+        List[Tuple[Sequence, int]]: list of tuples containing elements
+        and their lengths
     """
     return [(i, len(i)) for i in lst]

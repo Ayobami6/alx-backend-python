@@ -3,12 +3,12 @@
 
 from typing import Any, Union, Mapping, TypeVar
 
-N = TypeVar('N')
-Return = Union[Any, N]
-Default = Union[Any, None]
+T = TypeVar('T')
+R = Union[Any, T]
+D = Union[None, T]
 
 
-def safely_get_value(dct: Mapping, key: Any, default: Default = None) -> Return:
+def safely_get_value(dct: Mapping, key: Any, default: D = None) -> R:
     """Returns the value safely.
 
     Args:
