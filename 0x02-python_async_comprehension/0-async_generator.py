@@ -3,9 +3,10 @@
 
 import asyncio
 import random
+from typing import AsyncGenerator
 
 
-async def async_generator():
+async def async_generator() -> AsyncGenerator:
     """async_generator function """
     i = 0
     while i < 10:
