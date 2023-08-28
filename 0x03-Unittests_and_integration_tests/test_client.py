@@ -124,7 +124,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         cls.get_patcher = patch('requests.get', side_effect=get_payload)
 
-        cls.mock_res = cls.get_patcher.start()
+        cls.get_patcher.start()
 
     def test_public_repos(self) -> None:
         """ Test GithubOrgClient.public_repos """
@@ -142,8 +142,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     @classmethod
     def tearDownClass(cls) -> None:
         """ Tear down class """
-        cls.mock_res.stop()
-        # cls.repo_patcher.stop()
+        cls.get_patcher.stop()
 
 
 if __name__ == '__main__':
