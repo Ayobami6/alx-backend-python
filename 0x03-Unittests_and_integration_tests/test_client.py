@@ -76,6 +76,13 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @parameterized.expand(test_cases_4)
     def test_has_license(self, repo: Dict, key: str, expected: bool) -> None:
+        """ Test GithubOrgClient.has_license
+
+        Args:
+            repo (Dict): response repo
+            key (str): license key
+            expected (bool): expected result true or false
+        """
         result = GithubOrgClient.has_license(repo, key)
         self.assertEqual(result, expected)
 
