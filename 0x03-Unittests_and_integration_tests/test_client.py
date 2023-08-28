@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+""" Test GithubOrgClient module """
+
 import unittest
 from unittest.mock import patch, Mock
 from client import GithubOrgClient
@@ -16,8 +19,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @parameterized.expand(test_cases)
     @patch('client.get_json')
     def test_org(self, org: str, expected: dict, mck_mtd: Mock) -> None:
-        """ Test GithubOrgClient.org
-        """
+        """ Test GithubOrgClient.org """
         mck_mtd.return_value = expected
         client = GithubOrgClient(org)
         self.assertEqual(client.org, expected)
