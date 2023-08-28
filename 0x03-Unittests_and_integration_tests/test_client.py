@@ -7,6 +7,9 @@ from client import GithubOrgClient
 from parameterized import parameterized, parameterized_class
 from utils import get_json, memoize
 from typing import Dict
+from requests.exceptions import HTTPError
+from fixtures import TEST_PAYLOAD  # fixtures.TEST_PAYLOAD
+import json
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -85,6 +88,60 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         result = GithubOrgClient.has_license(repo, key)
         self.assertEqual(result, expected)
+
+
+test_cases = [
+    {"org_payload": TEST_PAYLOAD[0][0],
+     "repos_payload": TEST_PAYLOAD[0][1],
+     "expected_repos": TEST_PAYLOAD[0][2],
+     "apache2_repos": TEST_PAYLOAD[0][3]}]
+
+
+@parameterized_class(test_cases)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ Test integration GithubOrgClient class """
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        """ Set up class """
+
+        # cls.json_data = json.dumps(cls.repos_payload)
+        # attrs = {"json.return_value": cls.org_payload, }
+
+        # get resquest payloads
+        req_payload = {
+            "https://api.github.com/orgs/google": cls.org_payload,
+            "https://api.github.com/orgs/google/repos": cls.repos_payload,
+        }
+
+        def get_payload(url):
+            if url in req_payload.keys():
+                # get the corresponding payload for the url
+                return Mock(**{"json.return_value": req_payload[url]})
+            return Mock(**{"json.return_value": []})
+
+        cls.get_patcher = patch('requests.get', side_effect=get_payload)
+
+        cls.mock_res = cls.get_patcher.start()
+
+    def test_public_repos(self) -> None:
+        """ Test GithubOrgClient.public_repos """
+        client = GithubOrgClient("google")
+        self.assertEqual(client.public_repos(), self.expected_repos)
+        # self.get_patcher.stop()
+
+    def test_public_repos_with_license(self) -> None:
+        """ Test GithubOrgClient.public_repos with license """
+        client = GithubOrgClient("google")
+        self.assertEqual(client.public_repos(
+            license="apache-2.0"), self.apache2_repos)
+        # self.get_patcher.stop()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        """ Tear down class """
+        cls.mock_res.stop()
+        # cls.repo_patcher.stop()
 
 
 if __name__ == '__main__':
