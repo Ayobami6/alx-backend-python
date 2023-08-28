@@ -6,6 +6,7 @@ from unittest.mock import patch, Mock, PropertyMock
 from client import GithubOrgClient
 from parameterized import parameterized, parameterized_class
 from utils import get_json, memoize
+from typing import Dict
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -67,6 +68,16 @@ class TestGithubOrgClient(unittest.TestCase):
                              "test_repo", "test_repo_2"])
             mck_prop.assert_called_once()
         mck_mtd.assert_called_once()
+
+    test_cases_4 = [
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ]
+
+    @parameterized.expand(test_cases_4)
+    def test_has_license(self, repo: Dict, key: str, expected: bool) -> None:
+        result = GithubOrgClient.has_license(repo, key)
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
