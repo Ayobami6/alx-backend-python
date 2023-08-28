@@ -12,6 +12,7 @@ from typing import (
     Any,
     List,
     Tuple,
+    Callable
 )
 
 
@@ -90,12 +91,12 @@ class TestMemoize(unittest.TestCase):
         """
         class TestClass:
 
-            def a_method(self):
+            def a_method(self) -> int:
                 """ A method """
                 return 42
 
             @memoize
-            def a_property(self):
+            def a_property(self) -> Callable:
                 """ decorated property method """
                 return self.a_method()
 
