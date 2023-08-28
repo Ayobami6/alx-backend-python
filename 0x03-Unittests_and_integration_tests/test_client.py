@@ -66,7 +66,7 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(client.public_repos(), [
                              "test_repo", "test_repo_2"])
             mck_prop.assert_called_once()
-            mck_mtd.assert_called_once()
+        mck_mtd.assert_called_once()
 
 
 if __name__ == '__main__':
