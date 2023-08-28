@@ -35,11 +35,12 @@ class TestAcessNestedMap(unittest.TestCase):
             path (Sequence): Sequence of Items
             expect (Any): Any Value
         """
-        self.assertEqual(access_nested_map(nested_map, path), expect)
+        result = access_nested_map(nested_map, path)
+        self.assertEqual(result, expect)
 
     test_cases_2 = [
-        ({}, ("a",), KeyError),
-        ({"a": 1}, ("a", "b"), KeyError)
+        ({}, ("a",)),
+        ({"a": 1}, ("a", "b"))
     ]
 
     @parameterized.expand(test_cases_2)
@@ -54,7 +55,7 @@ class TestAcessNestedMap(unittest.TestCase):
             n_map (Dict[Any, Union[Dict, int]]): nested map
             path (Tuple[str]): path
         """
-        with self.assertRaises(exception):
+        with self.assertRaises(KeyError):
             access_nested_map(n_map, path)
 
 
