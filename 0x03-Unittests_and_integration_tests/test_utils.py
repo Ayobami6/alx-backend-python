@@ -16,13 +16,6 @@ from typing import (
 
 
 class TestAcessNestedMap(unittest.TestCase):
-
-    """ Module Test Class
-
-    Attributes:
-        test_cases (TYPE): Description
-    """
-
     test_cases = [
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
