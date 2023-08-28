@@ -114,7 +114,9 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             "https://api.github.com/orgs/google/repos": cls.repos_payload,
         }
 
-        def get_payload(url):
+        def get_payload(url: str) -> Mock:
+            """ get payload
+            """
             if url in req_payload.keys():
                 # get the corresponding payload for the url
                 return Mock(**{"json.return_value": req_payload[url]})
