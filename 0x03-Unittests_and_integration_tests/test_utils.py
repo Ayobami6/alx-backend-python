@@ -30,7 +30,7 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases)
-    def test_access_nested_map(self, nested_map: Dict[Any, Union[Dict, int]],
+    def test_access_nested_map(self, nested_map: Dict,
                                path: Tuple[str],
                                expect: Union[Dict, int]) -> None:
         """ Test access nested map with correct params
@@ -50,8 +50,14 @@ class TestAcessNestedMap(unittest.TestCase):
 
     @parameterized.expand(test_cases_2)
     def test_access_nested_map_exception(self, n_map:
-                                         Dict[Any, Union[Dict, int]],
+                                         Dict,
                                          path: Tuple[str]) -> None:
+        """ Test access nested map exception
+
+        Args:
+            n_map (Dict[Any, Union[Dict, int]]): nested map
+            path (Tuple[str]): path
+        """
         with self.assertRaises(KeyError):
             access_nested_map(n_map, path)
 
