@@ -47,8 +47,7 @@ class TestAcessNestedMap(unittest.TestCase):
     def test_access_nested_map_exception(
             self,
             n_map: Dict,
-            path: Tuple[str],
-            exception: KeyError) -> None:
+            path: Tuple[str],) -> None:
         """ Test access nested map exception
 
         Args:
@@ -83,8 +82,7 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """ Test memoize class
-    """
+    """ Test memoize class """
 
     def test_memoize(self) -> None:
         """ Test memoize
