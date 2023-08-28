@@ -49,7 +49,3 @@ class TestAcessNestedMap(unittest.TestCase):
                                          path: Sequence) -> None:
         with self.assertRaises(KeyError):
             access_nested_map(n_map, path)
-
-
-if __name__ == "__main__":
-    unittest.main()
