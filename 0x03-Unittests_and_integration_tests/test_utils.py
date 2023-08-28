@@ -24,9 +24,10 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases)
-    def test_access_nested_map(self, nested_map: Dict,
-                               path: Tuple[str],
-                               expect: Union[Dict, int]) -> None:
+    def test_access_nested_map(
+            self, nested_map: Dict,
+            path: Tuple[str],
+            expect: Union[Dict, int]) -> None:
         """ Test access nested map with correct params
 
         Args:
@@ -43,9 +44,10 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases_2)
-    def test_access_nested_map_exception(self, n_map:
-                                         Dict,
-                                         path: Tuple[str]) -> None:
+    def test_access_nested_map_exception(
+            self,
+            n_map: Dict,
+            path: Tuple[str]) -> None:
         """ Test access nested map exception
 
         Args:
@@ -96,7 +98,7 @@ class TestMemoize(unittest.TestCase):
                 return 42
 
             @memoize
-            def a_property(self) -> Callable:
+            def a_property(self) -> int:
                 """ decorated property method """
                 return self.a_method()
 
