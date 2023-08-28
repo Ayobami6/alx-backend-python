@@ -6,9 +6,11 @@ import unittest
 from utils import access_nested_map
 from parameterized import parameterized
 from typing import (
-    Mapping,
-    Sequence,
+    Dict,
+    Union,
     Any,
+    List,
+    Tuple,
 )
 
 
@@ -27,8 +29,9 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases)
-    def test_access_nested_map(self, nested_map: Mapping,
-                               path: Sequence, expect: Any) -> None:
+    def test_access_nested_map(self, nested_map: Dict[Any, Union[Dict, int]],
+                               path: Tuple[str],
+                               expect: Union[Dict, int]) -> None:
         """ Test access nested map with correct params
 
         Args:
@@ -45,7 +48,12 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases_2)
-    def test_access_nested_map_exception(self, n_map: Mapping,
-                                         path: Sequence) -> None:
+    def test_access_nested_map_exception(self, n_map:
+                                         Dict[Any, Union[Dict, int]],
+                                         path: Tuple[str]) -> None:
         with self.assertRaises(KeyError):
             access_nested_map(n_map, path)
+
+
+if __name__ == "__main__":
+    unittest.main()
