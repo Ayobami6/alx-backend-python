@@ -20,9 +20,6 @@ class TestAcessNestedMap(unittest.TestCase):
         test_cases (TYPE): Description
     """
 
-    def setUp(self):
-        print("Testing the AcessNestedMap method")
-
     test_cases = [
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
@@ -48,7 +45,8 @@ class TestAcessNestedMap(unittest.TestCase):
     ]
 
     @parameterized.expand(test_cases_2)
-    def test_access_nested_map_exception(self, n_map: Mapping, path: Sequence):
+    def test_access_nested_map_exception(self, n_map: Mapping,
+                                         path: Sequence) -> None:
         with self.assertRaises(KeyError):
             access_nested_map(n_map, path)
 
