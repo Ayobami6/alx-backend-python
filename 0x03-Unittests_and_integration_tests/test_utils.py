@@ -61,6 +61,8 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
+    """ Test get json class
+    """
 
     test_cases = [
         ("http://example.com", {"payload": True}),
