@@ -16,7 +16,7 @@ from typing import (
 )
 
 
-class TestAcessNestedMap(unittest.TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     test_cases = [
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
