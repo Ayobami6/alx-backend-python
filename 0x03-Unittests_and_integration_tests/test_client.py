@@ -13,6 +13,8 @@ import json
 
 
 class TestGithubOrgClient(unittest.TestCase):
+    """ GithubOrg Client Test Module
+    """
 
     # test cases with mocked responses
     test_cases = [
